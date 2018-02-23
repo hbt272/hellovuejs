@@ -7,7 +7,7 @@ const state = {
   availableNums: [],
   autoCall: false,
   minNum: 1,
-  maxNum: 10
+  maxNum: 90
 }
 export default new Vuex.Store({
   state
