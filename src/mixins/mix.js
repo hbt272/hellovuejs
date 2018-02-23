@@ -31,6 +31,39 @@ export const mix = {
       let index = Math.floor(Math.random() * Math.floor(this.$store.state.availableNums.length)) // expect: 0 -> i-1
       this.$store.state.calledNums.unshift(this.$store.state.availableNums[index]);
       this.$store.state.availableNums.splice(index, 1);
+    },
+
+    mix_playAudio() {
+      var audio = new Audio();
+      audio.src = '';
+      audio.play();
+    },
+
+    mix_onOffAutoCall(){
+      if(!this.$store.state.autoCall){
+        if(this.$store.state.availableNums.length == 0){
+          this.mix_initLoto(this.$store.state.minNum,this.$store.state.maxNum)
+        }
+        this.$store.state.autoCall = true;
+        this.mix_autoCall();
+      }
+      else{
+        this.$store.state.autoCall = false;
+      }
+
+    },
+
+    mix_autoCall(){
+      if(this.$store.state.autoCall && this.$store.state.availableNums.length > 0){
+        this.mix_callNumber();
+        setTimeout(()=>{
+          this.mix_autoCall();
+        },4000)
+      }
+      else{
+        this.$store.state.autoCall = false;
+      }
     }
+
   }
 }

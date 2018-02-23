@@ -4,7 +4,10 @@ Vue.use(Vuex)
 const state = {
   currentNum: 0,
   calledNums: [],
-  availableNums: []
+  availableNums: [],
+  autoCall: false,
+  minNum: 1,
+  maxNum: 10
 }
 export default new Vuex.Store({
   state

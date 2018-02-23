@@ -1,5 +1,4 @@
 <style lang="scss" scoped>
-
 .md-progress-bar {
     position: absolute;
     top: 0;
@@ -13,90 +12,118 @@
 }
 
 .md-content {
-    max-height: 50%;
+    // max-height: 80%;
     overflow: auto;
 }
 
 .md-display-4 {
-    font-size: 15rem;
+    font-size: 4rem;
 }
 
-.number-over {
-    font-size: 15rem;
+.isNumber {
+    font-size: 10rem;
 }
 
+.md-speed-dial {
+    z-index: 10;
+}
+
+.md-speed-dial.md-top-left,
+.md-speed-dial.md-top-right {
+    top: 62px;
+}
+
+.align-center {
+    margin: auto;
+}
+
+.currentNum {
+    color: green;
+}
 </style>
 
 <template>
-
 <div>
-    <md-speed-dial class="md-top-left" md-direction="top">
-        <md-speed-dial-target @click="mix_initLoto(1,90)">
-            <md-icon >autorenew</md-icon>
-        <!-- <md-icon class="md-morph-final">edit</md-icon> -->
-        </md-speed-dial-target>
+  <md-speed-dial class="md-top-left" md-direction="bottom">
+    <md-speed-dial-target @click="mix_initLoto($store.state.minNum,$store.state.maxNum)">
+      <md-icon>autorenew</md-icon>
+      <!-- <md-icon class="md-morph-final">edit</md-icon> -->
+    </md-speed-dial-target>
 
-         <md-speed-dial-content>
-        <md-button class="md-icon-button">
-          <md-icon>edit</md-icon>
-        </md-button>
+    <md-speed-dial-content>
+      <md-button class="md-icon-button">
+        <md-icon>edit</md-icon>
+      </md-button>
 
-        <!-- <md-button class="md-icon-button">
+      <!-- <md-button class="md-icon-button">
           <md-icon>event</md-icon>
         </md-button> -->
-      </md-speed-dial-content>
-    </md-speed-dial>
-    <md-speed-dial class="md-top-right" md-direction="top">
-        <md-speed-dial-target class="md-primary" @click="mix_callNumber">
-            <md-icon >my_location</md-icon>
-        </md-speed-dial-target>
-    </md-speed-dial>
-    <div class="md-layout md-gutter">
-        <div class="md-layout-item">
+    </md-speed-dial-content>
+  </md-speed-dial>
+  <md-speed-dial class="md-top-right" md-direction="bottom">
+    <md-speed-dial-target class="md-primary" @click="mix_callNumber">
+      <md-icon>my_location</md-icon>
+    </md-speed-dial-target>
+  </md-speed-dial>
+  <md-speed-dial class="md-bottom-right" md-direction="top">
+    <md-speed-dial-target class="md-primary" @click="mix_onOffAutoCall">
+      <md-icon v-if="!$store.state.autoCall">play_circle_outline</md-icon>
+      <md-icon v-if="$store.state.autoCall">pause</md-icon>
+    </md-speed-dial-target>
+  </md-speed-dial>
+  <div class="md-layout md-alignment-center">
+    <div class="md-layout-item md-small-hide">
 
-        </div>
-        <div class="md-layout-item">
-            <!-- <md-button class="md-primary md-raised md-accent" @click="mix_initLoto(1,10)">RESET</md-button> -->
-            <md-empty-state>
-                <span class="md-display-4">{{$store.state.calledNums[0] || 'GO!'}}</span>
-                <!-- <md-button class="md-primary md-raised" @click="mix_callNumber">CALL NEW NUMBER</md-button> -->
-            </md-empty-state>
-        </div>
-        <div class="md-layout-item">
-            <md-content class="md-scrollbar">
-                <md-list>
-                    <md-list-item v-for="num in $store.state.calledNums">
-                        <span class="md-display-2 md-alignment-top-center">{{num}}</span>
-                    </md-list-item>
-                </md-list>
-            </md-content>
-        </div>
     </div>
+    <div class="md-layout-item md-small-100 md-xsmall-size-100">
+      <!-- <md-button class="md-primary md-raised md-accent" @click="mix_initLoto(1,10)">RESET</md-button> -->
+      <md-empty-state>
+        <span class="md-display-4 currentNum" :class="{ 'isNumber': (typeof $store.state.calledNums[0]) === 'number'}">{{$store.state.calledNums[0] || 'GO!'}}</span>
+        <!-- <md-button class="md-primary md-raised" @click="mix_callNumber">CALL NEW NUMBER</md-button> -->
+      </md-empty-state>
+    </div>
+    <div class="md-layout-item md-small-100 md-xsmall-size-100">
+      <md-content class="md-scrollbar">
+        <md-list>
+          <md-list-item v-for="(num, index) in $store.state.calledNums" :key="index">
+            <span class="md-display-2 align-center">{{num}}</span>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </div>
+  </div>
+  <!-- <adsense ad-client="ca-pub-xxxxxxxxxxxxxxxx" ad-slot="XXXXXXXX" ad-style="display: block" ad-format="auto">
+  </adsense> -->
 </div>
-
 </template>
 
 <script>
-
 import {
-    mix
+  mix
 }
 from '../mixins/mix'
 
 export default {
-    name: 'Loto',
-    data: () => {
-        return {}
+  name: 'Loto',
+  data: () => {
+    return {}
+  },
+  methods: {
+    callNumber() {
+      this.$store.state.currentNum += 1;
     },
-    methods: {
-        callNumber() {
-                this.$store.state.currentNum += 1;
-            },
-            reduceNumber() {
-                this.$store.state.currentNum -= 1;
-            }
-    },
-    mixins: [mix]
+    reduceNumber() {
+      this.$store.state.currentNum -= 1;
+    }
+  },
+  created() {
+    if (this.$store.state.availableNums.length < 1 && this.$store.state.calledNums.length > 0) {
+      this.mix_initLoto(this.$store.state.minNum, this.$store.state.maxNum)
+    }
+    // this.$http.get('http://172.25.97.37:666/sal/20172318').then(res => {
+    //   console.log(res);
+    // })
+  },
+  mixins: [mix]
 }
-
 </script>
