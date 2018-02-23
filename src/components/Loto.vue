@@ -117,7 +117,7 @@ export default {
     }
   },
   created() {
-    if (this.$store.state.availableNums.length < 1 && this.$store.state.calledNums.length > 0) {
+    if (this.$store.state.availableNums.length == 0 && this.$store.state.calledNums.length == 0) {
       this.mix_initLoto(this.$store.state.minNum, this.$store.state.maxNum)
     }
     // this.$http.get('http://172.25.97.37:666/sal/20172318').then(res => {
