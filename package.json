@@ -1,7 +1,7 @@
 {
-  "name": "hello-vuejs",
-  "version": "1.0.0",
-  "description": "A Vue.js project",
+  "name": "loto-online",
+  "version": "1.1.0",
+  "description": "Chơi Lô tô online",
   "author": "Tan Ho <hbt272@gmail.com>",
   "private": true,
   "homepage": "https://github.com/hbt272/loto",
@@ -15,8 +15,10 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "vue": "^2.5.2",
+    "vue-google-adsense": "^1.0.3",
     "vue-material": "^1.0.0-beta-8",
     "vue-router": "^3.0.1",
+    "vue-script2": "^2.0.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

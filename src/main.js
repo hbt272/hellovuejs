@@ -9,9 +9,13 @@ import 'vue-material/dist/vue-material.css'
 import 'vue-material/dist/theme/default.css'
 import store from './store/store'
 import axios from 'axios'
-// import VueAdsense from 'vue-adsense'
+import Ads from 'vue-google-adsense'
 
 Vue.use(VueMaterial)
+Vue.use(require('vue-script2'))
+Vue.use(Ads.Adsense)
+Vue.use(Ads.InArticleAdsense)
+Vue.use(Ads.InFeedAdsense)
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
@@ -20,8 +24,8 @@ Vue.prototype.$http = axios
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
   store,
+  router,
   components: {
     App
   },

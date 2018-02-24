@@ -58,7 +58,7 @@ export const mix = {
         this.mix_callNumber();
         setTimeout(()=>{
           this.mix_autoCall();
-        },4000)
+        },this.$store.state.timeout)
       }
       else{
         this.$store.state.autoCall = false;

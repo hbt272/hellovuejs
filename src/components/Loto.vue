@@ -21,16 +21,25 @@
 }
 
 .isNumber {
-    font-size: 10rem;
+    font-size: 12rem;
 }
 
 .md-speed-dial {
-    z-index: 10;
+    z-index: 3;
 }
 
 .md-speed-dial.md-top-left,
 .md-speed-dial.md-top-right {
     top: 62px;
+}
+
+.md-speed-dial.md-bottom-left,
+.md-speed-dial.md-bottom-right {
+    position: fixed;
+}
+
+.md-layout.md-alignment-center{
+  align-items: unset;
 }
 
 .align-center {
@@ -72,8 +81,12 @@
     </md-speed-dial-target>
   </md-speed-dial>
   <div class="md-layout md-alignment-center">
-    <div class="md-layout-item md-small-hide">
-
+    <div class="md-layout-item md-small-100">
+      <Adsense
+        data-ad-client="ca-pub-8525780142236607"
+        data-ad-slot="9262103896">
+      </Adsense>
+</script>
     </div>
     <div class="md-layout-item md-small-100 md-xsmall-size-100">
       <!-- <md-button class="md-primary md-raised md-accent" @click="mix_initLoto(1,10)">RESET</md-button> -->
@@ -87,6 +100,12 @@
         <md-list>
           <md-list-item v-for="(num, index) in $store.state.calledNums" :key="index">
             <span class="md-display-2 align-center">{{num}}</span>
+            <div v-if="(index % 9) == 0">
+              <InArticleAdsense
+                data-ad-client="ca-pub-8525780142236607"
+                data-ad-slot="9421885996">
+              </InArticleAdsense>
+            </div>
           </md-list-item>
         </md-list>
       </md-content>

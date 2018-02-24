@@ -14,7 +14,13 @@
 <div>
   <div class="md-layout md-alignment-center">
     <div class="md-layout-item md-size-10" v-for="(num, index) in numbers" :key="index">
-      <span class="" :class="{ 'exits': exits(num, $store.state.calledNums) }">{{num}}</span>
+      <span :class="{ 'exits': exits(num, $store.state.calledNums) }">{{num}}</span>
+    </div>
+    <div class="md-layout-item md-size-100">
+      <Adsense
+        data-ad-client="ca-pub-8525780142236607"
+        data-ad-slot="9262103896">
+      </Adsense>
     </div>
   </div>
 </div>
