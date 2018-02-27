@@ -9,7 +9,8 @@ const state = {
   minNum: 1,
   maxNum: 90,
   timeout: 5000,
-  audioBaseSrc:"../assets/audio/",
+  audioBaseSrc:"https://raw.githubusercontent.com/hbt272/loto/master/src/assets/audio/",
+  audioSrc:"",
   stateBeforeOpts:{}
 }
 export default new Vuex.Store({

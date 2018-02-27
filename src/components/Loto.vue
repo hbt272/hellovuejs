@@ -121,7 +121,7 @@
   <audio ref="player" autoplay preload="auto">
     <source :src="$store.state.audioBaseSrc + $store.state.calledNums[0] +'.mp3'" type="audio/mpeg">
   </audio>
-  <audio-player :sources="audioSources" :loop="true"></audio-player>
+  <!-- <audio-player :sources="audioSources" :loop="true"></audio-player> -->
   <!-- <audio v-el:audio :src="$store.state.audioSRC" preload="auto"></audio> -->
 </div>
 </template>

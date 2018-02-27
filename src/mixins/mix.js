@@ -35,8 +35,8 @@ export const mix = {
     },
 
     mix_playAudio() {
+      this.$store.state.audioSRC = this.$store.state.audioBaseSrc + this.$store.state.calledNums[0] + '.mp3';
       console.log(this.$refs.player)
-      // this.$store.state.audioSRC = source;
 
       this.$refs.player.play();
       // this.$refs.player.load();
