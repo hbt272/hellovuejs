@@ -31,12 +31,15 @@ export const mix = {
       let index = Math.floor(Math.random() * Math.floor(this.$store.state.availableNums.length)) // expect: 0 -> i-1
       this.$store.state.calledNums.unshift(this.$store.state.availableNums[index]);
       this.$store.state.availableNums.splice(index, 1);
+      this.mix_playAudio()
     },
 
     mix_playAudio() {
-      var audio = new Audio();
-      audio.src = '';
-      audio.play();
+      console.log(this.$refs.player)
+      // this.$store.state.audioSRC = source;
+
+      this.$refs.player.play();
+      // this.$refs.player.load();
     },
 
     mix_onOffAutoCall(){

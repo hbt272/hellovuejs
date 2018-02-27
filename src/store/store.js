@@ -9,6 +9,7 @@ const state = {
   minNum: 1,
   maxNum: 90,
   timeout: 5000,
+  audioBaseSrc:"../assets/audio/",
   stateBeforeOpts:{}
 }
 export default new Vuex.Store({

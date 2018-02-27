@@ -74,6 +74,12 @@
       <md-icon>my_location</md-icon>
     </md-speed-dial-target>
   </md-speed-dial>
+  <md-speed-dial class="md-bottom-left" md-direction="top">
+    <md-speed-dial-target class="md-primary" @click="play">
+      <md-icon v-if="!$store.state.autoCall">play_circle_outline</md-icon>
+      <md-icon v-if="$store.state.autoCall">pause</md-icon>
+    </md-speed-dial-target>
+  </md-speed-dial>
   <md-speed-dial class="md-bottom-right" md-direction="top">
     <md-speed-dial-target class="md-primary" @click="mix_onOffAutoCall">
       <md-icon v-if="!$store.state.autoCall">play_circle_outline</md-icon>
@@ -81,13 +87,6 @@
     </md-speed-dial-target>
   </md-speed-dial>
   <div class="md-layout md-alignment-center">
-    <div class="md-layout-item md-small-100">
-      <Adsense
-        data-ad-client="ca-pub-8525780142236607"
-        data-ad-slot="9262103896">
-      </Adsense>
-</script>
-    </div>
     <div class="md-layout-item md-small-100 md-xsmall-size-100">
       <!-- <md-button class="md-primary md-raised md-accent" @click="mix_initLoto(1,10)">RESET</md-button> -->
       <md-empty-state>
@@ -95,24 +94,35 @@
         <!-- <md-button class="md-primary md-raised" @click="mix_callNumber">CALL NEW NUMBER</md-button> -->
       </md-empty-state>
     </div>
+    <div class="md-layout-item md-size-100">
+      <Adsense
+        data-ad-client="ca-pub-8525780142236607"
+        data-ad-slot="9262103896">
+      </Adsense>
+    </div>
     <div class="md-layout-item md-small-100 md-xsmall-size-100">
       <md-content class="md-scrollbar">
         <md-list>
-          <md-list-item v-for="(num, index) in $store.state.calledNums" :key="index">
-            <span class="md-display-2 align-center">{{num}}</span>
-            <div v-if="(index % 9) == 0">
-              <InArticleAdsense
-                data-ad-client="ca-pub-8525780142236607"
-                data-ad-slot="9421885996">
-              </InArticleAdsense>
+          <md-list-item v-for="(num, index) in $store.state.calledNums" :key="index" v-if="index !=0 ">
+            <div class="align-center" >
+              <span class="md-display-2">{{num}}</span>
+              <div v-if="(index % 9) == 0">
+                <InArticleAdsense
+                  data-ad-client="ca-pub-8525780142236607"
+                  data-ad-slot="9421885996">
+                </InArticleAdsense>
+              </div>
             </div>
           </md-list-item>
         </md-list>
       </md-content>
     </div>
   </div>
-  <!-- <adsense ad-client="ca-pub-xxxxxxxxxxxxxxxx" ad-slot="XXXXXXXX" ad-style="display: block" ad-format="auto">
-  </adsense> -->
+  <audio ref="player" autoplay preload="auto">
+    <source :src="$store.state.audioBaseSrc + $store.state.calledNums[0] +'.mp3'" type="audio/mpeg">
+  </audio>
+  <audio-player :sources="audioSources" :loop="true"></audio-player>
+  <!-- <audio v-el:audio :src="$store.state.audioSRC" preload="auto"></audio> -->
 </div>
 </template>
 
@@ -122,10 +132,19 @@ import {
 }
 from '../mixins/mix'
 
+import AudioPlayer from './audio-player.vue'
+
 export default {
   name: 'Loto',
+  components: {
+      AudioPlayer
+    },
   data: () => {
-    return {}
+    return {
+      audioSources: [
+          "assets/audio/25.mp3"
+        ]
+    }
   },
   methods: {
     callNumber() {
@@ -133,6 +152,9 @@ export default {
     },
     reduceNumber() {
       this.$store.state.currentNum -= 1;
+    },
+    play(){
+      this.$refs.player.play();
     }
   },
   created() {

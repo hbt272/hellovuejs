@@ -58,6 +58,13 @@
                   <md-input v-model="$store.state.timeout"></md-input>
                 </md-field>
             </md-list-item>
+
+            <md-list-item>
+                <md-field>
+                  <label>SOURCE-BASE</label>
+                  <md-input v-model="$store.state.audioBaseSrc"></md-input>
+                </md-field>
+            </md-list-item>
         </md-list>
     </md-drawer>
   <router-view/>
