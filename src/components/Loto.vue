@@ -75,9 +75,9 @@
     </md-speed-dial-target>
   </md-speed-dial>
   <md-speed-dial class="md-bottom-left" md-direction="top">
-    <md-speed-dial-target class="md-primary" @click="play">
-      <md-icon v-if="!$store.state.autoCall">play_circle_outline</md-icon>
-      <md-icon v-if="$store.state.autoCall">pause</md-icon>
+    <md-speed-dial-target class="md-primary" @click="$store.state.playAudio = !$store.state.playAudio">
+      <md-icon v-if="!$store.state.playAudio">volume_off</md-icon>
+      <md-icon v-if="$store.state.playAudio">volume_up</md-icon>
     </md-speed-dial-target>
   </md-speed-dial>
   <md-speed-dial class="md-bottom-right" md-direction="top">
@@ -118,11 +118,6 @@
       </md-content>
     </div>
   </div>
-  <audio ref="player" autoplay preload="auto">
-    <source :src="$store.state.audioBaseSrc + $store.state.calledNums[0] +'.mp3'" type="audio/mpeg">
-  </audio>
-  <!-- <audio-player :sources="audioSources" :loop="true"></audio-player> -->
-  <!-- <audio v-el:audio :src="$store.state.audioSRC" preload="auto"></audio> -->
 </div>
 </template>
 
@@ -141,9 +136,6 @@ export default {
     },
   data: () => {
     return {
-      audioSources: [
-          "assets/audio/25.mp3"
-        ]
     }
   },
   methods: {
@@ -161,9 +153,6 @@ export default {
     if (this.$store.state.availableNums.length == 0 && this.$store.state.calledNums.length == 0) {
       this.mix_initLoto(this.$store.state.minNum, this.$store.state.maxNum)
     }
-    // this.$http.get('http://172.25.97.37:666/sal/20172318').then(res => {
-    //   console.log(res);
-    // })
   },
   mixins: [mix]
 }

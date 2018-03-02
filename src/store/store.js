@@ -8,9 +8,8 @@ const state = {
   autoCall: false,
   minNum: 1,
   maxNum: 90,
-  timeout: 5000,
-  audioBaseSrc:"https://raw.githubusercontent.com/hbt272/loto/master/src/assets/audio/",
-  audioSrc:"",
+  timeout: 6000,
+  playAudio:true,
   stateBeforeOpts:{}
 }
 export default new Vuex.Store({

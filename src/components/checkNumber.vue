@@ -47,7 +47,7 @@ export default {
   created() {
     this.$store.state.autoCall = false;
     this.numbers = [];
-    for(let i=1; i<=90; i++){
+    for(let i=this.$store.state.minNum; i<=this.$store.state.maxNum; i++){
       this.numbers.push(i);
     }
   },
