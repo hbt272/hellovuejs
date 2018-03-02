@@ -38,8 +38,8 @@ export const mix = {
       if(!this.$store.state.playAudio) return;
       
       console.log(this.$refs.a);
-      this.$store.state.audioSrc = this.$store.state.audioBaseSrc + this.$store.state.calledNums[0] + '.mp3';
-      let player = new Audio('../../static/audio/'+ this.$store.state.calledNums[0] +'.mp3');
+      // this.$store.state.audioSrc = this.$store.state.audioBaseSrc + this.$store.state.calledNums[0] + '.mp3';
+      let player = new Audio(this.$store.state.audioBaseSrc + this.$store.state.calledNums[0] +'.mp3');
       player.play();
     },
 
